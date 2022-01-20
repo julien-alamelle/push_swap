@@ -1,3 +1,5 @@
+#include "pile.h"
+
 static t_pile	*spa(t_pile *p)
 {
 	(p->u)[(p->o)[p->b]] = (p->u)[p->b];
@@ -34,7 +36,7 @@ t_pile	*pa(t_pile *p)
 		return (p);
 	p->last_op = 1;
 	if (p->a == -1)
-		return (spa(*p));
+		return (spa(p));
 	(p->u)[(p->o)[p->b]] = (p->u)[p->b];
 	(p->o)[(p->u)[p->b]] = (p->o)[p->b];
 	(p->o)[p->b] = (p->o)[p->a];
@@ -44,7 +46,7 @@ t_pile	*pa(t_pile *p)
 		p->b = -1;
 	else
 		p->b = (p->u)[p->b];
-	(p->u)[(p->u)[p->a]] = p->a;
+	(p->u)[(p->o)[p->a]] = p->a;
 	p->a = (p->o)[p->a];
 	return (p);
 }
@@ -57,7 +59,7 @@ t_pile	*pb(t_pile *p)
 		return (p);
 	p->last_op = 0;
 	if (p->b == -1)
-		return (spb(*p));
+		return (spb(p));
 	(p->u)[(p->o)[p->a]] = (p->u)[p->a];
 	(p->o)[(p->u)[p->a]] = (p->o)[p->a];
 	(p->o)[p->a] = (p->o)[p->b];
@@ -67,7 +69,7 @@ t_pile	*pb(t_pile *p)
 		p->a = -1;
 	else
 		p->a = (p->u)[p->a];
-	(p->u)[(p->u)[p->b]] = p->b;
+	(p->u)[(p->o)[p->b]] = p->b;
 	p->b = (p->o)[p->b];
 	return (p);
 }

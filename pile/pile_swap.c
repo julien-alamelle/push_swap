@@ -1,3 +1,5 @@
+#include "pile.h"
+
 t_pile	*sa(t_pile *p)
 {
 	if (!p)
@@ -5,8 +7,8 @@ t_pile	*sa(t_pile *p)
 	if (p->a == -1)
 		return (p);
 	p->last_op = 2;
-	if ((p->u)[p->a] == p->a)
-		return (p);
+	if ((p->u)[p->a] == (p->o)[p->a])
+		return (ra(p));
 	(p->o)[(p->u)[p->a]] = (p->o)[p->a];
 	(p->u)[(p->o)[p->a]] = (p->u)[p->a];
 	(p->o)[p->a] = (p->u)[p->a];
@@ -24,8 +26,8 @@ t_pile	*sb(t_pile *p)
 	if (p->b == -1)
 		return (p);
 	p->last_op = 2;
-	if ((p->u)[p->b] == p->b)
-		return (p);
+	if ((p->u)[p->b] == (p->o)[p->b])
+		return (rb(p));
 	(p->o)[(p->u)[p->b]] = (p->o)[p->b];
 	(p->u)[(p->o)[p->b]] = (p->u)[p->b];
 	(p->o)[p->b] = (p->u)[p->b];

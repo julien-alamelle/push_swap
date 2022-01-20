@@ -1,4 +1,5 @@
 #include "pile.h"
+#include <stdlib.h>
 
 static void	copy_content(t_pile *src, t_pile *dst)
 {
@@ -48,6 +49,8 @@ t_pile	*pile_del(t_pile *p)
 	return (0);
 }
 
+#include <stdio.h>
+
 int	*get_pos(t_pile *p)
 {
 	int	*ret;
@@ -59,24 +62,30 @@ int	*get_pos(t_pile *p)
 		return (ret);
 	i = 0;
 	cur = p->a;
+//	printf("%2d init\n", cur);
 	if (cur != -1)
 	{
 		ret[i++] = cur;
 		while ((p->u)[cur] != p->a)
 		{
+//	printf("%2d\n", cur);
 			cur = (p->u)[cur];
 			ret[i++] = cur;
 		}
 	}
+//	printf("pa done\n");
 	ret[i++] = -1;
 	cur = p->b;
+//	printf("%2d init\n", cur);
 	if (cur == -1)
 		return (ret);
 	ret[i++] = cur;
 	while ((p->u)[cur] != p->b)
 	{
+//	printf("%2d\n", cur);
 		cur = (p->u)[cur];
 		ret[i++] = cur;
 	}
+//	printf("pb done\n");
 	return (ret);
 }

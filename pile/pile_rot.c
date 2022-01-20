@@ -1,3 +1,5 @@
+#include "pile.h"
+
 t_pile	*ra(t_pile *p)
 {
 	if (!p)

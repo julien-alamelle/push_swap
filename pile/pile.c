@@ -1,6 +1,9 @@
 #include "pile.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <limits.h>
 
-static int	atoi(unsigned int *ret, char *s)
+static int	ft_atoi(unsigned int *ret, char *s)
 {
 	double	d;
 	int		sign;
@@ -17,11 +20,14 @@ static int	atoi(unsigned int *ret, char *s)
 			d = 10 * d + sign * (s[i] - '0');
 		else
 		{
-			write(2, "not an int", 10);
+			write(2, "Error\n", 6);
+write(2, "not an int\n", 11);
 			return (1);
 		}
 		if (d < INT_MIN || d > INT_MAX)
-			write(2, "int overflow", 12);
+		{
+			write(2, "Error\n", 6);
+write(2, "int overflow\n", 13);}
 		if (d < INT_MIN || d > INT_MAX)
 			return (1);
 	}
@@ -29,14 +35,14 @@ static int	atoi(unsigned int *ret, char *s)
 	return (0);
 }
 
-static int	normalize_arg(int n, unsigned int *tab)
+static int	normalize_arg(unsigned int n, unsigned int *tab)
 {
-	int		i;
-	int		j;
-	int		min;
+	unsigned int	i;
+	unsigned int	j;
+	int			min;
 
 	i = 0;
-	while (i < n);
+	while (i < n)
 	{
 		j = 0;
 		while (j < n && tab[j] < i)
@@ -48,7 +54,8 @@ static int	normalize_arg(int n, unsigned int *tab)
 				min = j;
 			else if (tab[j] == tab[min])
 			{
-				write(2, "repeated input", 14);
+				write(2, "Error\n", 6);
+write(2, "repeated input\n", 15);
 				return (1);
 			}
 		}
@@ -64,7 +71,7 @@ static unsigned int	*get_arg(int n, char **av)
 
 	i = 0;
 	ret = malloc(n * sizeof(int));
-	while (i < n && ret && !atoi(ret[i], av[i]))
+	while (i < n && ret && !ft_atoi(ret + i, av[i]))
 		++i;
 	if (i < n)
 	{
@@ -94,7 +101,7 @@ static void	fill_pile(t_pile *pile, int n, unsigned int *arg)
 			(pile->o)[arg[i]] = arg[i - 1];
 		else
 			(pile->o)[arg[i]] = arg[n - 1];
-		if (i - n)
+		if (n - i - 1)
 			(pile->u)[arg[i]] = arg[i + 1];
 		else
 			(pile->u)[arg[i]] = arg[0];
