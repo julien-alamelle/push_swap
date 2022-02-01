@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pile.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/20 18:59:08 by jalamell          #+#    #+#             */
+/*   Updated: 2022/01/28 19:09:34 by jalamell         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pile.h"
 #include <stdlib.h>
 #include <unistd.h>
@@ -21,13 +33,10 @@ static int	ft_atoi(unsigned int *ret, char *s)
 		else
 		{
 			write(2, "Error\n", 6);
-write(2, "not an int\n", 11);
 			return (1);
 		}
 		if (d < INT_MIN || d > INT_MAX)
-		{
 			write(2, "Error\n", 6);
-write(2, "int overflow\n", 13);}
 		if (d < INT_MIN || d > INT_MAX)
 			return (1);
 	}
@@ -39,7 +48,7 @@ static int	normalize_arg(unsigned int n, unsigned int *tab)
 {
 	unsigned int	i;
 	unsigned int	j;
-	int			min;
+	int				min;
 
 	i = 0;
 	while (i < n)
@@ -55,7 +64,6 @@ static int	normalize_arg(unsigned int n, unsigned int *tab)
 			else if (tab[j] == tab[min])
 			{
 				write(2, "Error\n", 6);
-write(2, "repeated input\n", 15);
 				return (1);
 			}
 		}
@@ -67,7 +75,7 @@ write(2, "repeated input\n", 15);
 static unsigned int	*get_arg(int n, char **av)
 {
 	unsigned int	*ret;
-	int		i;
+	int				i;
 
 	i = 0;
 	ret = malloc(n * sizeof(int));
@@ -93,7 +101,6 @@ static void	fill_pile(t_pile *pile, int n, unsigned int *arg)
 	pile->n = n;
 	pile->a = arg[0];
 	pile->b = -1;
-	pile->last_op = 0;
 	i = -1;
 	while (++i < n)
 	{
@@ -110,7 +117,7 @@ static void	fill_pile(t_pile *pile, int n, unsigned int *arg)
 
 t_pile	*pile_init(int ac, char **av)
 {
-	t_pile		*ret;
+	t_pile			*ret;
 	unsigned int	*arg;
 
 	arg = get_arg(ac, av);

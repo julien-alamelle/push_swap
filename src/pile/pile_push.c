@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pile_push.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/20 18:59:47 by jalamell          #+#    #+#             */
+/*   Updated: 2022/01/28 19:10:44 by jalamell         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pile.h"
+#include <unistd.h>
 
 static t_pile	*spa(t_pile *p)
 {
@@ -28,13 +41,14 @@ static t_pile	*spb(t_pile *p)
 	return (p);
 }
 
-t_pile	*pa(t_pile *p)
+t_pile	*pa(t_pile *p, char print)
 {
 	if (!p)
 		return (p);
 	if (p->b == -1)
 		return (p);
-	p->last_op = 1;
+	if (print)
+		write(1, "pa\n", 3);
 	if (p->a == -1)
 		return (spa(p));
 	(p->u)[(p->o)[p->b]] = (p->u)[p->b];
@@ -51,13 +65,14 @@ t_pile	*pa(t_pile *p)
 	return (p);
 }
 
-t_pile	*pb(t_pile *p)
+t_pile	*pb(t_pile *p, char print)
 {
 	if (!p)
 		return (p);
 	if (p->a == -1)
 		return (p);
-	p->last_op = 0;
+	if (print)
+		write(1, "pb\n", 3);
 	if (p->b == -1)
 		return (spb(p));
 	(p->u)[(p->o)[p->a]] = (p->u)[p->a];
