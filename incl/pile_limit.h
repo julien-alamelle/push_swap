@@ -27,34 +27,42 @@
 /*   8 : rb   conflict ra, rrb, rrr   not after rr, rra   */
 /*  16 : rr   conflict rra, rrb, rrr                      */
 /*  32 : rra  conflict ra, rr, rrb                        */
-/*  64 : rrb  conflict ra, rr, rra                        */
+/*  64 : rrb  conflict rb, rr, rra                        */
 /* 128 : rrr  conflict ra, rb, rr     not after rra, rrb  */
 /**********************************************************/
 
 typedef struct s_pile_lim
 {
 	unsigned char	last_op;
-	char			ua;
-	char			ub;
-	char			oa;
-	char			ob;
+	int				ua;
+	int				ub;
+	int				oa;
+	int				ob;
 	t_pile			*pile;
 }	t_pile_lim;
 
-//t_pile_lim	*pile_lim_init(t_pile *p, int min, int max, int d;);
-//t_pile_lim	*pile_lim_copy(t_pile_lim *p);
-//t_pile_lim	*pile_lim_del(t_pile_lim *p);
-//int		*lim_get_pos(t_pile_lim *p);
-//t_pile_lim	*lim_sa(t_pile_lim *p, char print);
-//t_pile_lim	*lim_sb(t_pile_lim *p, char print);
-//t_pile_lim	*lim_ss(t_pile_lim *p, char print);
+/**************************/
+/* info (pile_lim_init) : */
+/* 0 = ua                 */
+/* 1 = oa                 */
+/* 2 = ub                 */
+/* 3 = ob                 */
+/**************************/
+
+t_pile_lim	*pile_lim_init(t_pile *p, int min, int max, int info);
+t_pile_lim	*pile_lim_copy(t_pile_lim *p);
+t_pile_lim	*pile_lim_del(t_pile_lim *p);
+int			*lim_get_pos(t_pile_lim *p);
+t_pile_lim	*lim_sa(t_pile_lim *p, char print);
+t_pile_lim	*lim_sb(t_pile_lim *p, char print);
+t_pile_lim	*lim_ss(t_pile_lim *p, char print);
 t_pile_lim	*lim_pa(t_pile_lim *p, char print);
 t_pile_lim	*lim_pb(t_pile_lim *p, char print);
-//t_pile_lim	*lim_ra(t_pile_lim *p, char print);
-//t_pile_lim	*lim_rb(t_pile_lim *p, char print);
-//t_pile_lim	*lim_rr(t_pile_lim *p, char print);
-//t_pile_lim	*lim_rra(t_pile_lim *p, char print);
-//t_pile_lim	*lim_rrb(t_pile_lim *p, char print);
-//t_pile_lim	*lim_rrr(t_pile_lim *p, char print);
+t_pile_lim	*lim_ra(t_pile_lim *p, char print);
+t_pile_lim	*lim_rb(t_pile_lim *p, char print);
+t_pile_lim	*lim_rr(t_pile_lim *p, char print);
+t_pile_lim	*lim_rra(t_pile_lim *p, char print);
+t_pile_lim	*lim_rrb(t_pile_lim *p, char print);
+t_pile_lim	*lim_rrr(t_pile_lim *p, char print);
 
 #endif

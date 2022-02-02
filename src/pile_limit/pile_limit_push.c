@@ -15,26 +15,36 @@
 
 t_pile_lim	*lim_pa(t_pile_lim *p, char print)
 {
+	t_pile_lim	*ret;
+
 	if (!p)
-		return (p);
+		return (0);
 	if (p->last_op == 0 || p->ub == 0)
-		return (pile_lim_del(p));
-	pa(p->pile, print);
-	p->last_op = 1;
-	p->ub--;
-	p->ua++;
-	return (p);
+		return (0);
+	ret = pile_lim_copy(p);
+	if (!ret)
+		return (0);
+	pa(ret->pile, print);
+	ret->last_op = 1;
+	ret->ub--;
+	ret->ua++;
+	return (ret);
 }
 
 t_pile_lim	*lim_pb(t_pile_lim *p, char print)
 {
+	t_pile_lim	*ret;
+
 	if (!p)
-		return (p);
+		return (0);
 	if (p->last_op == 1 || p->ua == 0)
-		return (pile_lim_del(p));
-	pb(p->pile, print);
-	p->last_op = 0;
-	p->ua--;
-	p->ub++;
-	return (p);
+		return (0);
+	ret = pile_lim_copy(p);
+	if (!ret)
+		return (0);
+	pb(ret->pile, print);
+	ret->last_op = 0;
+	ret->ua--;
+	ret->ub++;
+	return (ret);
 }

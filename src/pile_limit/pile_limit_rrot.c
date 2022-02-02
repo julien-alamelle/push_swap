@@ -1,49 +1,72 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pile_rrot.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 19:00:26 by jalamell          #+#    #+#             */
-/*   Updated: 2022/01/20 19:26:04 by jalamell         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
-
+#include "pile_limit.h"
 #include "pile.h"
 #include <unistd.h>
 
-t_pile	*rra(t_pile *p, char print)
+t_pile_lim	*lim_rra(t_pile_lim *p, char print)
 {
+	t_pile_lim	*ret;
+
 	if (!p)
-		return (p);
-	if (p->a == -1)
-		return (p);
-	p->last_op = 32;
-	if (print)
-		write(1, "rra\n", 4);
-	p->a = (p->o)[p->a];
-	return (p);
+		return (0);
+	if (!p->oa || (p->oa == -1 && !p->ua) || (p->last_op & 84))
+		return (0);
+	ret = pile_lim_copy(p);
+	if (!ret)
+		return (0);
+	ret->last_op = 32;
+	rra(ret->pile, print);
+	if (ret->oa != -1)
+	{
+		++(ret->ua);
+		--(ret->oa);
+	}
+	return (ret);
 }
 
-t_pile	*rrb(t_pile *p, char print)
+t_pile_lim	*lim_rrb(t_pile_lim *p, char print)
 {
+	t_pile_lim	*ret;
+
 	if (!p)
-		return (p);
-	if (p->b == -1)
-		return (p);
-	p->last_op = 64;
-	if (print)
-		write(1, "rrb\n", 4);
-	p->b = (p->o)[p->b];
-	return (p);
+		return (0);
+	if (!p->ob || (p->ob == -1 && !p->ub) || (p->last_op & 56))
+		return (0);
+	ret = pile_lim_copy(p);
+	if (!ret)
+		return (0);
+	ret->last_op = 64;
+	rrb(ret->pile, print);
+	if (ret->ob != -1)
+	{
+		++(ret->ub);
+		--(ret->ob);
+	}
+	return (ret);
 }
 
-t_pile	*rrr(t_pile *p, char print)
+t_pile_lim	*lim_rrr(t_pile_lim *p, char print)
 {
-	p = rrb(rra(p, 0), 0);
-	p->last_op = 128;
-	if (print)
-		write(1, "rrr\n", 4);
-	return (p);
+	t_pile_lim	*ret;
+
+	if (!p)
+		return (0);
+	if (!p->oa || !p->ob || (p->oa == -1 && !p->ua) || (p->ob == -1 && !p->ub)
+		|| (p->last_op & 124))
+		return (0);
+	ret = pile_lim_copy(p);
+	if (!ret)
+		return (0);
+	ret->last_op = 128;
+	rrr(ret->pile, print);
+	if (ret->oa != -1)
+	{
+		++(ret->ua);
+		--(ret->oa);
+	}
+	if (ret->ob != -1)
+	{
+		++(ret->ub);
+		--(ret->ob);
+	}
+	return (ret);
 }

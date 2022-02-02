@@ -1,20 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pile.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 18:59:08 by jalamell          #+#    #+#             */
-/*   Updated: 2022/01/20 19:34:03 by jalamell         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
-
+#include "pile_limit.h"
 #include "pile.h"
-#include <stdlib.h>
+#include <stdlib.h>/*
 #include <unistd.h>
-#include <limits.h>
-
+#include <limits.h>*/
+/*
 static int	ft_atoi(unsigned int *ret, char *s)
 {
 	double	d;
@@ -115,25 +104,31 @@ static void	fill_pile(t_pile *pile, int n, unsigned int *arg)
 			(pile->u)[arg[i]] = arg[0];
 	}
 }
-
-t_pile	*pile_init(int ac, char **av)
+*/
+t_pile_lim	*pile_lim_init(t_pile *p, int min, int max, int info)
 {
-	t_pile			*ret;
-	unsigned int	*arg;
-
-	arg = get_arg(ac, av);
-	if (!arg)
+	t_pile_lim	*ret;
+	if (!p || max <= min || min < 0 || max > p->n)
+		return (0)
+	ret = malloc(sizeof(t_pile_lim));
+	if (!ret)
 		return (0);
-	ret = malloc(sizeof(t_pile));
-	if (ret)
+	ret->ua = 0;
+	ret->ub = 0;
+	ret->oa = 0;
+	ret->ob = 0;
+	ret->last_op = 0;
+	if (!min)
+		ret->ua = -1;
+	if (max == p->n)
+		ret->ub = -1;
+	if (info | 2)
 	{
-		ret->u = malloc(ac * sizeof(int));
-		ret->o = malloc(ac * sizeof(int));
-		if (ret->u && ret->o)
-			fill_pile(ret, ac, arg);
-		else
-			ret = pile_del(ret);
+		last_op = 1
+		if (
 	}
-	free(arg);
+	else
+	{
+	}
 	return (ret);
 }

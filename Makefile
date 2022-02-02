@@ -23,7 +23,7 @@ OBJDIR=.obj/
 FILES=main\
 	  pile/pile pile/pile_push pile/pile_rot pile/pile_rrot pile/pile_swap pile/pile_util\
 	  quick_sort/quick_sort quick_sort/quick_sort_2\
-	  pile_limit/pile_limit_push
+	  pile_limit/pile_limit_push pile_limit/pile_limit_rot pile_limit/pile_limit_rrot pile_limit/pile_limit_swap pile_limit/pile_limit_util
 INCLFILES=pile.h quick_sort.h pile_limit.h
 SUBDIR=pile/ quick_sort/ pile_limit/
 
