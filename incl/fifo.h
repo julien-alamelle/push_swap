@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fifo.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 18:51:44 by jalamell          #+#    #+#             */
-/*   Updated: 2022/02/03 17:17:42 by jalamell         ###   ########lyon.fr   */
+/*   Created: 2022/02/03 15:37:41 by jalamell          #+#    #+#             */
+/*   Updated: 2022/02/03 16:14:21 by jalamell         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pile.h"
-#include "quick_sort.h"
+#ifndef FIFO_H
+# define FIFO_H
 
-# include <stdio.h>
-
-int	main(int ac, char **av)
+typedef struct s_fifo_cell
 {
-	t_pile	*pile;
+	void				*data;
+	struct s_fifo_cell	*next;
+}	t_fifo_cell;
 
-	pile = pile_init(ac - 1, av + 1);
-	if (!pile)
-		return (0);
-	if (pile_is_sort(pile))
-		return (0);
-printf("%d\n",quick_sort(pile));
-	pile_del(pile);
-	return (0);
-}
+typedef struct s_fifo
+{
+	t_fifo_cell	*first;
+	t_fifo_cell	*last;
+	void		(*del)(void *);
+}	t_fifo;
+
+t_fifo	*fifo_init(void (*del)(void *));
+t_fifo	*fifo_del(t_fifo *f);
+void	*fifo_get(t_fifo *f);
+void	fifo_add(t_fifo *f, void *data);
+
+#endif

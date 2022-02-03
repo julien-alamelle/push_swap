@@ -1,134 +1,106 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pile_limit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/03 10:03:07 by jalamell          #+#    #+#             */
+/*   Updated: 2022/02/03 10:29:29 by jalamell         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pile_limit.h"
 #include "pile.h"
-#include <stdlib.h>/*
-#include <unistd.h>
-#include <limits.h>*/
-/*
-static int	ft_atoi(unsigned int *ret, char *s)
+#include <stdlib.h>
+
+t_pile_lim	*pile_lim_copy(t_pile_lim *p)
 {
-	double	d;
-	int		sign;
-	int		i;
+	t_pile_lim	*ret;
 
-	d = 0;
-	sign = 1;
-	i = -1;
-	while (s[++i])
+	if (!p)
+		return (0);
+	ret = malloc(sizeof(t_pile_lim));
+	if (ret)
 	{
-		if (!i && s[i] == '-')
-			sign = -1;
-		else if (s[i] >= '0' && s[i] <= '9')
-			d = 10 * d + sign * (s[i] - '0');
-		else
-		{
-			write(2, "Error\n", 6);
-			return (1);
-		}
-		if (d < INT_MIN || d > INT_MAX)
-			write(2, "Error\n", 6);
-		if (d < INT_MIN || d > INT_MAX)
-			return (1);
-	}
-	*ret = d - INT_MIN;
-	return (0);
-}
-
-static int	normalize_arg(unsigned int n, unsigned int *tab)
-{
-	unsigned int	i;
-	unsigned int	j;
-	int				min;
-
-	i = 0;
-	while (i < n)
-	{
-		j = 0;
-		while (j < n && tab[j] < i)
-			++j;
-		min = j;
-		while (++j < n)
-		{
-			if (tab[j] >= i && tab[j] < tab[min])
-				min = j;
-			else if (tab[j] == tab[min])
-			{
-				write(2, "Error\n", 6);
-				return (1);
-			}
-		}
-		tab[min] = i++;
-	}
-	return (0);
-}
-
-static unsigned int	*get_arg(int n, char **av)
-{
-	unsigned int	*ret;
-	int				i;
-
-	i = 0;
-	ret = malloc(n * sizeof(int));
-	while (i < n && ret && !ft_atoi(ret + i, av[i]))
-		++i;
-	if (i < n)
-	{
-		free(ret);
-		ret = 0;
-	}
-	if (ret && normalize_arg(n, ret))
-	{
-		free(ret);
-		ret = 0;
+		ret->pile = pile_copy(p->pile);
+		if (!ret->pile)
+			return (pile_lim_del(ret));
+		ret->last_op = p->last_op;
+		ret->ua = p->ua;
+		ret->ub = p->ub;
+		ret->oa = p->oa;
+		ret->ob = p->ob;
 	}
 	return (ret);
 }
 
-static void	fill_pile(t_pile *pile, int n, unsigned int *arg)
+t_pile_lim	*pile_lim_del(t_pile_lim *p)
 {
-	int	i;
-
-	pile->n = n;
-	pile->a = arg[0];
-	pile->b = -1;
-	pile->last_op = 0;
-	i = -1;
-	while (++i < n)
+	if (p)
 	{
-		if (i)
-			(pile->o)[arg[i]] = arg[i - 1];
-		else
-			(pile->o)[arg[i]] = arg[n - 1];
-		if (n - i - 1)
-			(pile->u)[arg[i]] = arg[i + 1];
-		else
-			(pile->u)[arg[i]] = arg[0];
+		pile_del(p->pile);
+		free(p);
 	}
+	return (0);
 }
-*/
-t_pile_lim	*pile_lim_init(t_pile *p, int min, int max, int info)
+
+int	*lim_get_pos(t_pile_lim *p)
 {
-	t_pile_lim	*ret;
-	if (!p || max <= min || min < 0 || max > p->n)
-		return (0)
-	ret = malloc(sizeof(t_pile_lim));
-	if (!ret)
+	int	*ret;
+
+	if (!p)
 		return (0);
-	ret->ua = 0;
-	ret->ub = 0;
-	ret->oa = 0;
-	ret->ob = 0;
-	ret->last_op = 0;
+	ret = get_pos(p->pile);
+	if (!ret)
+		return (ret);
+	if (!p->ua)
+		ret[p->ua] -= 1;
+	if (!p->ub)
+		ret[p->ua] -= 2;
+	return (ret);
+}
+
+static void	pile_lim_fill(t_pile_lim *p, int min, int max, int info)
+{
+	p->ua = 0;
+	p->ub = 0;
+	p->oa = 0;
+	p->ob = 0;
+	p->last_op = 0;
 	if (!min)
-		ret->ua = -1;
-	if (max == p->n)
-		ret->ub = -1;
+		p->ua = -1;
+	if (max == p->pile->n)
+		p->ub = -1;
 	if (info | 2)
 	{
-		last_op = 1
-		if (
+		p->last_op = 1;
+		if (info | 1)
+			p->ob = max - min;
+		else
+			p->ub = max - min;
 	}
 	else
 	{
+		if (info | 1)
+			p->oa = max - min;
+		else
+			p->ua = max - min;
 	}
+}
+
+t_pile_lim	*pile_lim_init(t_pile *p, int min, int max, int info)
+{
+	t_pile_lim	*ret;
+
+	if (!p || max <= min || min < 0 || max > p->n)
+		return (0);
+	ret = malloc(sizeof(t_pile_lim));
+	if (!ret)
+		return (0);
+	ret->pile = pile_cut(p, min, max, info);
+	if (!(ret->pile))
+		return (pile_lim_del(ret));
+	pile_lim_fill(ret, min, max, info);
 	return (ret);
 }

@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   perfect_sort.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 18:51:44 by jalamell          #+#    #+#             */
-/*   Updated: 2022/02/03 17:17:42 by jalamell         ###   ########lyon.fr   */
+/*   Created: 2022/02/03 16:25:17 by jalamell          #+#    #+#             */
+/*   Updated: 2022/02/03 17:15:48 by jalamell         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pile.h"
-#include "quick_sort.h"
+#ifndef PERFECT_SORT_H
+# define PERFECT_SORT_H
 
-# include <stdio.h>
+# include "pile.h"
 
-int	main(int ac, char **av)
-{
-	t_pile	*pile;
+int	perfect_sort(t_pile *p, int min, int max, int info);
 
-	pile = pile_init(ac - 1, av + 1);
-	if (!pile)
-		return (0);
-	if (pile_is_sort(pile))
-		return (0);
-printf("%d\n",quick_sort(pile));
-	pile_del(pile);
-	return (0);
-}
+#endif

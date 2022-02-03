@@ -6,11 +6,12 @@
 /*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 19:01:35 by jalamell          #+#    #+#             */
-/*   Updated: 2022/01/25 17:34:33 by jalamell         ###   ########lyon.fr   */
+/*   Updated: 2022/02/03 17:14:27 by jalamell         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "quick_sort.h"
+#include "perfect_sort.h"
 #include <unistd.h>
 
 int	quick_sort(t_pile *pile)
@@ -19,8 +20,8 @@ int	quick_sort(t_pile *pile)
 	int	i;
 
 	i = pile->n;
-	if (i <= 1)
-		return (0); //TODO
+	if (i <= 5)
+		return (perfect_sort(pile, 0, pile->n, 0));
 	cut = i / 2;
 	while (i--)
 	{

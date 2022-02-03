@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   btree.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 18:51:44 by jalamell          #+#    #+#             */
-/*   Updated: 2022/02/03 17:17:42 by jalamell         ###   ########lyon.fr   */
+/*   Created: 2022/02/03 16:17:29 by jalamell          #+#    #+#             */
+/*   Updated: 2022/02/03 16:21:36 by jalamell         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pile.h"
-#include "quick_sort.h"
+#ifndef BTREE_H
+# define BTREE_H
 
-# include <stdio.h>
-
-int	main(int ac, char **av)
+typedef struct s_tree
 {
-	t_pile	*pile;
+	int				*data;
+	struct s_tree	*smaller;
+	struct s_tree	*biger;
+}	t_tree;
 
-	pile = pile_init(ac - 1, av + 1);
-	if (!pile)
-		return (0);
-	if (pile_is_sort(pile))
-		return (0);
-printf("%d\n",quick_sort(pile));
-	pile_del(pile);
-	return (0);
-}
+t_tree	*tree_init(int *data);
+t_tree	*tree_del(t_tree *t);
+int		tree_add(t_tree **t, int *data, int size);
+
+#endif
