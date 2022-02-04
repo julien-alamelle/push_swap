@@ -69,20 +69,20 @@ static void	pile_lim_fill(t_pile_lim *p, int min, int max, int info)
 	p->ob = 0;
 	p->last_op = 0;
 	if (!min)
-		p->ua = -1;
+		p->oa = -1;
 	if (max == p->pile->n)
-		p->ub = -1;
-	if (info | 2)
+		p->ob = -1;
+	if (info & 2)
 	{
 		p->last_op = 1;
-		if (info | 1)
+		if (info & 1)
 			p->ob = max - min;
 		else
 			p->ub = max - min;
 	}
 	else
 	{
-		if (info | 1)
+		if (info & 1)
 			p->oa = max - min;
 		else
 			p->ua = max - min;

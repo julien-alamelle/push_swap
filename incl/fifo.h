@@ -23,10 +23,10 @@ typedef struct s_fifo
 {
 	t_fifo_cell	*first;
 	t_fifo_cell	*last;
-	void		(*del)(void *);
+	void		*(*del)(void *);
 }	t_fifo;
 
-t_fifo	*fifo_init(void (*del)(void *));
+t_fifo	*fifo_init(void *(*del)(void *));
 t_fifo	*fifo_del(t_fifo *f);
 void	*fifo_get(t_fifo *f);
 void	fifo_add(t_fifo *f, void *data);

@@ -23,7 +23,7 @@ static t_fifo_cell	*fifo_cell_init(void *data)
 	return (ret);
 }
 
-t_fifo	*fifo_init(void (*del)(void *))
+t_fifo	*fifo_init(void *(*del)(void *))
 {
 	t_fifo	*ret;
 
@@ -70,6 +70,8 @@ void	fifo_add(t_fifo *f, void *data)
 {
 	t_fifo_cell	*new;
 
+	if (!f)
+		return ;
 	new = fifo_cell_init(data);
 	if (!new)
 	{
@@ -79,6 +81,7 @@ void	fifo_add(t_fifo *f, void *data)
 	}
 	if (!f->first)
 		f->first = new;
-	f->last->next = new;
+	else
+		f->last->next = new;
 	f->last = new;
 }

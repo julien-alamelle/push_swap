@@ -12,7 +12,6 @@
 
 #include "pile_limit.h"
 #include "pile.h"
-#include <unistd.h>
 
 t_pile_lim	*lim_sa(t_pile_lim *p, char print)
 {

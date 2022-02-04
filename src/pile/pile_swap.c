@@ -28,7 +28,7 @@ t_pile	*sa(t_pile *p, char print)
 	(p->o)[p->a] = (p->u)[p->a];
 	(p->u)[p->a] = (p->u)[(p->u)[p->a]];
 	(p->o)[(p->u)[p->a]] = p->a;
-	(p->o)[(p->u)[p->a]] = p->a;
+	(p->u)[(p->o)[p->a]] = p->a;
 	p->a = (p->o)[p->a];
 	return (p);
 }
@@ -48,7 +48,7 @@ t_pile	*sb(t_pile *p, char print)
 	(p->o)[p->b] = (p->u)[p->b];
 	(p->u)[p->b] = (p->u)[(p->u)[p->b]];
 	(p->o)[(p->u)[p->b]] = p->b;
-	(p->o)[(p->u)[p->b]] = p->b;
+	(p->u)[(p->o)[p->b]] = p->b;
 	p->b = (p->o)[p->b];
 	return (p);
 }

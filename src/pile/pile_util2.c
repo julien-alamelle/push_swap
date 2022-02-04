@@ -41,6 +41,26 @@ static t_pile	*malloc_init(int n)
 	return (ret);
 }
 
+static void	link_start(t_pile *ret, t_pile *p, int start, int end, int info)
+{
+	if (start >= 0)
+	{
+		(ret->o)[start] = end;
+		(ret->u)[end] = start;
+		if (info & 2)
+			ret->b = start;
+		else
+			ret->a = start;
+	}
+	else
+	{
+		if (info & 2)
+			ret->b = p->b;
+		else
+			ret->a = p->a;
+	}
+}
+
 t_pile	*pile_cut(t_pile *p, int min, int max, int info)
 {
 	t_pile	*ret;
@@ -48,6 +68,8 @@ t_pile	*pile_cut(t_pile *p, int min, int max, int info)
 	int		end;
 	int		i;
 
+	start = -1;
+	end = -1;
 	ret = malloc_init(max - min);
 	if (!ret || !p)
 		return (pile_del(ret));
@@ -61,11 +83,6 @@ t_pile	*pile_cut(t_pile *p, int min, int max, int info)
 		if ((ret->u)[i] >= ret->n || (ret->u)[i] < 0)
 			end = i;
 	}
-	(ret->o)[start] = end;
-	(ret->u)[end] = start;
-	if (info | 2)
-		ret->b = start;
-	else
-		ret->a = start;
+	link_start(ret, p, start, end, info);
 	return (ret);
 }
