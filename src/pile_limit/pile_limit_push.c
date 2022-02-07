@@ -6,12 +6,13 @@
 /*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:06:41 by jalamell          #+#    #+#             */
-/*   Updated: 2022/02/01 17:07:31 by jalamell         ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 18:16:15 by jalamell         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pile_limit.h"
 
+# include <stdio.h>
 t_pile_lim	*lim_pa(t_pile_lim *p)
 {
 	t_pile_lim	*ret;
@@ -28,6 +29,8 @@ t_pile_lim	*lim_pa(t_pile_lim *p)
 	fifo_add(ret->path, (void *) 4, 0);
 	ret->ub--;
 	ret->ua++;
+dprintf(2,"pa ");
+//pile_lim_print(ret);
 	return (ret);
 }
 
@@ -47,5 +50,6 @@ t_pile_lim	*lim_pb(t_pile_lim *p)
 	fifo_add(ret->path, (void *) 5, 0);
 	ret->ua--;
 	ret->ub++;
+dprintf(2,"pb ");
 	return (ret);
 }

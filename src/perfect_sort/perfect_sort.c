@@ -6,7 +6,7 @@
 /*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 16:29:23 by jalamell          #+#    #+#             */
-/*   Updated: 2022/02/03 17:15:25 by jalamell         ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 17:58:38 by jalamell         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int	perfect_sort(t_pile *p, int min, int max, int info)
 //dprintf(2, "pile_lim_init\n");
 	cur = pile_lim_init(p, min, max, info);
 //dprintf(2, "tree_init\n");
+dprintf(2, "explore %d %d %d %d\n", cur->ua, cur->oa, cur->ub, cur->ob);
 	done = tree_init(lim_get_pos(cur));
 //dprintf(2, "fifo_init\n");
 	todo = fifo_init((void *(*)(void *))pile_lim_del);

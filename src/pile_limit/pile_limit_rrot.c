@@ -6,12 +6,13 @@
 /*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 10:03:50 by jalamell          #+#    #+#             */
-/*   Updated: 2022/02/03 10:03:52 by jalamell         ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 18:15:47 by jalamell         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pile_limit.h"
 
+# include <stdio.h>
 t_pile_lim	*lim_rra(t_pile_lim *p)
 {
 	t_pile_lim	*ret;
@@ -31,6 +32,7 @@ t_pile_lim	*lim_rra(t_pile_lim *p)
 		++(ret->ua);
 		--(ret->oa);
 	}
+dprintf(2,"rra ");
 	return (ret);
 }
 
@@ -53,6 +55,7 @@ t_pile_lim	*lim_rrb(t_pile_lim *p)
 		++(ret->ub);
 		--(ret->ob);
 	}
+dprintf(2,"rrb ");
 	return (ret);
 }
 
@@ -81,5 +84,6 @@ t_pile_lim	*lim_rrr(t_pile_lim *p)
 		++(ret->ub);
 		--(ret->ob);
 	}
+dprintf(2,"rrr ");
 	return (ret);
 }
