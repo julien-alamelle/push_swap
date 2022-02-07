@@ -12,7 +12,6 @@
 
 #include "quick_sort.h"
 #include "perfect_sort.h"
-#include <unistd.h>
 
 int	quick_sort(t_pile *pile)
 {
@@ -20,7 +19,7 @@ int	quick_sort(t_pile *pile)
 	int	i;
 
 	i = pile->n;
-	if (i <= 5)
+	if (i <= 8)
 		return (perfect_sort(pile, 0, pile->n, 0));
 	cut = i / 2;
 	while (i--)
@@ -39,8 +38,8 @@ int	qs_a(t_pile *pile, int min, int max)
 	int	i;
 
 	i = max - min;
-	if (i <= 1)
-		return (0); //TODO
+	if (i <= 8)
+		return (perfect_sort(pile, min, max, 0));
 	cut = min + i / 2;
 	while (i--)
 	{
@@ -49,7 +48,7 @@ int	qs_a(t_pile *pile, int min, int max)
 		else
 			ra(pile, 1);
 	}
-	return (qs_a(pile, cut, max) + qs_ob(pile, min, cut) + max - min);
+	return (qs_a(pile, cut, max) + qs_ub(pile, min, cut) + max - min);
 }
 
 int	qs_b(t_pile *pile, int min, int max)
@@ -58,11 +57,8 @@ int	qs_b(t_pile *pile, int min, int max)
 	int	i;
 
 	i = max - min;
-	if (i <= 1)
-	{
-		pa(pile, 1);
-		return (1); //TODO
-	}
+	if (i <= 8)
+		return (perfect_sort(pile, min, max, 2));
 	cut = min + i / 2;
 	while (i--)
 	{
@@ -71,5 +67,5 @@ int	qs_b(t_pile *pile, int min, int max)
 		else
 			pa(pile, 1);
 	}
-	return (qs_oa(pile, cut, max) + qs_b(pile, min, cut) + max - min);
+	return (qs_ua(pile, cut, max) + qs_b(pile, min, cut) + max - min);
 }

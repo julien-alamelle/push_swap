@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "pile_limit.h"
-#include "pile.h"
 #include <stdlib.h>
 
 t_pile_lim	*pile_lim_copy(t_pile_lim *p)
@@ -24,7 +23,8 @@ t_pile_lim	*pile_lim_copy(t_pile_lim *p)
 	if (ret)
 	{
 		ret->pile = pile_copy(p->pile);
-		if (!ret->pile)
+		ret->path = fifo_copy(p->path);
+		if (!ret->pile || !ret->path)
 			return (pile_lim_del(ret));
 		ret->last_op = p->last_op;
 		ret->ua = p->ua;
@@ -37,11 +37,11 @@ t_pile_lim	*pile_lim_copy(t_pile_lim *p)
 
 t_pile_lim	*pile_lim_del(t_pile_lim *p)
 {
-	if (p)
-	{
-		pile_del(p->pile);
-		free(p);
-	}
+	if (!p)
+		return (0);
+	fifo_del(p->path);
+	pile_del(p->pile);
+	free(p);
 	return (0);
 }
 
@@ -68,10 +68,6 @@ static void	pile_lim_fill(t_pile_lim *p, int min, int max, int info)
 	p->oa = 0;
 	p->ob = 0;
 	p->last_op = 0;
-	if (!min)
-		p->oa = -1;
-	if (max == p->pile->n)
-		p->ob = -1;
 	if (info & 2)
 	{
 		p->last_op = 1;
@@ -99,8 +95,13 @@ t_pile_lim	*pile_lim_init(t_pile *p, int min, int max, int info)
 	if (!ret)
 		return (0);
 	ret->pile = pile_cut(p, min, max, info);
-	if (!(ret->pile))
+	ret->path = fifo_init(0);
+	if (!ret->pile || !ret->pile)
 		return (pile_lim_del(ret));
 	pile_lim_fill(ret, min, max, info);
+	/*if (max == p->n)
+		ret->oa = -1;
+	if (!min)
+		ret->ob = -1;*/
 	return (ret);
 }

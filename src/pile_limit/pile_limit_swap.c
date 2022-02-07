@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "pile_limit.h"
-#include "pile.h"
 
-t_pile_lim	*lim_sa(t_pile_lim *p, char print)
+t_pile_lim	*lim_sa(t_pile_lim *p)
 {
 	t_pile_lim	*ret;
 
@@ -25,11 +24,12 @@ t_pile_lim	*lim_sa(t_pile_lim *p, char print)
 	if (!ret)
 		return (0);
 	ret->last_op = 2;
-	sa(ret->pile, print);
+	fifo_add(ret->path, (void *) 1, 0);
+	sa(ret->pile, 0);
 	return (ret);
 }
 
-t_pile_lim	*lim_sb(t_pile_lim *p, char print)
+t_pile_lim	*lim_sb(t_pile_lim *p)
 {
 	t_pile_lim	*ret;
 
@@ -41,11 +41,12 @@ t_pile_lim	*lim_sb(t_pile_lim *p, char print)
 	if (!ret)
 		return (0);
 	ret->last_op = 2;
-	sb(ret->pile, print);
+	fifo_add(ret->path, (void *) 2, 0);
+	sb(ret->pile, 0);
 	return (ret);
 }
 
-t_pile_lim	*lim_ss(t_pile_lim *p, char print)
+t_pile_lim	*lim_ss(t_pile_lim *p)
 {
 	t_pile_lim	*ret;
 
@@ -57,6 +58,7 @@ t_pile_lim	*lim_ss(t_pile_lim *p, char print)
 	if (!ret)
 		return (0);
 	ret->last_op = 2;
-	ss(ret->pile, print);
+	fifo_add(ret->path, (void *) 2, 0);
+	ss(ret->pile, 0);
 	return (ret);
 }

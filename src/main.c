@@ -13,8 +13,6 @@
 #include "pile.h"
 #include "quick_sort.h"
 
-# include <stdio.h>
-
 int	main(int ac, char **av)
 {
 	t_pile	*pile;
@@ -22,9 +20,8 @@ int	main(int ac, char **av)
 	pile = pile_init(ac - 1, av + 1);
 	if (!pile)
 		return (0);
-	if (pile_is_sort(pile))
-		return (0);
-printf("%d\n",quick_sort(pile));
+	if (!pile_is_sort(pile))
+		quick_sort(pile);
 	pile_del(pile);
 	return (0);
 }

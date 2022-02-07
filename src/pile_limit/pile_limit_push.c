@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pile.h"
 #include "pile_limit.h"
 
-t_pile_lim	*lim_pa(t_pile_lim *p, char print)
+t_pile_lim	*lim_pa(t_pile_lim *p)
 {
 	t_pile_lim	*ret;
 
@@ -24,14 +23,15 @@ t_pile_lim	*lim_pa(t_pile_lim *p, char print)
 	ret = pile_lim_copy(p);
 	if (!ret)
 		return (0);
-	pa(ret->pile, print);
+	pa(ret->pile, 0);
 	ret->last_op = 1;
+	fifo_add(ret->path, (void *) 4, 0);
 	ret->ub--;
 	ret->ua++;
 	return (ret);
 }
 
-t_pile_lim	*lim_pb(t_pile_lim *p, char print)
+t_pile_lim	*lim_pb(t_pile_lim *p)
 {
 	t_pile_lim	*ret;
 
@@ -42,8 +42,9 @@ t_pile_lim	*lim_pb(t_pile_lim *p, char print)
 	ret = pile_lim_copy(p);
 	if (!ret)
 		return (0);
-	pb(ret->pile, print);
+	pb(ret->pile, 0);
 	ret->last_op = 0;
+	fifo_add(ret->path, (void *) 5, 0);
 	ret->ua--;
 	ret->ub++;
 	return (ret);

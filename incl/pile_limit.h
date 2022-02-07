@@ -14,6 +14,7 @@
 # define PILE_LIMIT_H
 
 # include "pile.h"
+# include "fifo.h"
 
 /**********************************************************/
 /* last_op :                                              */
@@ -39,6 +40,7 @@ typedef struct s_pile_lim
 	int				oa;
 	int				ob;
 	t_pile			*pile;
+	t_fifo			*path;
 }	t_pile_lim;
 
 /**************************/
@@ -52,17 +54,20 @@ typedef struct s_pile_lim
 t_pile_lim	*pile_lim_init(t_pile *p, int min, int max, int info);
 t_pile_lim	*pile_lim_copy(t_pile_lim *p);
 t_pile_lim	*pile_lim_del(t_pile_lim *p);
+t_pile_lim	*pile_lim_print(t_pile_lim *p);
+t_pile_lim	*pile_lim_exec(t_pile_lim *pl, t_pile *p);
 int			*lim_get_pos(t_pile_lim *p);
-t_pile_lim	*lim_sa(t_pile_lim *p, char print);
-t_pile_lim	*lim_sb(t_pile_lim *p, char print);
-t_pile_lim	*lim_ss(t_pile_lim *p, char print);
-t_pile_lim	*lim_pa(t_pile_lim *p, char print);
-t_pile_lim	*lim_pb(t_pile_lim *p, char print);
-t_pile_lim	*lim_ra(t_pile_lim *p, char print);
-t_pile_lim	*lim_rb(t_pile_lim *p, char print);
-t_pile_lim	*lim_rr(t_pile_lim *p, char print);
-t_pile_lim	*lim_rra(t_pile_lim *p, char print);
-t_pile_lim	*lim_rrb(t_pile_lim *p, char print);
-t_pile_lim	*lim_rrr(t_pile_lim *p, char print);
+int			pile_lim_is_sort(t_pile_lim *p);
+t_pile_lim	*lim_sa(t_pile_lim *p);
+t_pile_lim	*lim_sb(t_pile_lim *p);
+t_pile_lim	*lim_ss(t_pile_lim *p);
+t_pile_lim	*lim_pa(t_pile_lim *p);
+t_pile_lim	*lim_pb(t_pile_lim *p);
+t_pile_lim	*lim_ra(t_pile_lim *p);
+t_pile_lim	*lim_rb(t_pile_lim *p);
+t_pile_lim	*lim_rr(t_pile_lim *p);
+t_pile_lim	*lim_rra(t_pile_lim *p);
+t_pile_lim	*lim_rrb(t_pile_lim *p);
+t_pile_lim	*lim_rrr(t_pile_lim *p);
 
 #endif

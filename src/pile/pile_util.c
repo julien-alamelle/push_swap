@@ -65,7 +65,6 @@ int	*get_pos(t_pile *p)
 	int	*ret;
 	int	i;
 	int	cur;
-
 	if (!p)
 		return (0);
 	ret = malloc((p->n + 1) * sizeof(int));

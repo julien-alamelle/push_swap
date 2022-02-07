@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "pile_limit.h"
-#include "pile.h"
 
-t_pile_lim	*lim_rra(t_pile_lim *p, char print)
+t_pile_lim	*lim_rra(t_pile_lim *p)
 {
 	t_pile_lim	*ret;
 
@@ -25,7 +24,8 @@ t_pile_lim	*lim_rra(t_pile_lim *p, char print)
 	if (!ret)
 		return (0);
 	ret->last_op = 32;
-	rra(ret->pile, print);
+	fifo_add(ret->path, (void *) 9, 0);
+	rra(ret->pile, 0);
 	if (ret->oa != -1)
 	{
 		++(ret->ua);
@@ -34,7 +34,7 @@ t_pile_lim	*lim_rra(t_pile_lim *p, char print)
 	return (ret);
 }
 
-t_pile_lim	*lim_rrb(t_pile_lim *p, char print)
+t_pile_lim	*lim_rrb(t_pile_lim *p)
 {
 	t_pile_lim	*ret;
 
@@ -46,7 +46,8 @@ t_pile_lim	*lim_rrb(t_pile_lim *p, char print)
 	if (!ret)
 		return (0);
 	ret->last_op = 64;
-	rrb(ret->pile, print);
+	fifo_add(ret->path, (void *) 10, 0);
+	rrb(ret->pile, 0);
 	if (ret->ob != -1)
 	{
 		++(ret->ub);
@@ -55,7 +56,7 @@ t_pile_lim	*lim_rrb(t_pile_lim *p, char print)
 	return (ret);
 }
 
-t_pile_lim	*lim_rrr(t_pile_lim *p, char print)
+t_pile_lim	*lim_rrr(t_pile_lim *p)
 {
 	t_pile_lim	*ret;
 
@@ -68,7 +69,8 @@ t_pile_lim	*lim_rrr(t_pile_lim *p, char print)
 	if (!ret)
 		return (0);
 	ret->last_op = 128;
-	rrr(ret->pile, print);
+	fifo_add(ret->path, (void *) 11, 0);
+	rrr(ret->pile, 0);
 	if (ret->oa != -1)
 	{
 		++(ret->ua);

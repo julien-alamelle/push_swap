@@ -66,12 +66,18 @@ void	*fifo_get(t_fifo *f)
 	return (ret);
 }
 
-void	fifo_add(t_fifo *f, void *data)
+void	fifo_add(t_fifo *f, void *data, int cond)
 {
 	t_fifo_cell	*new;
 
 	if (!f)
 		return ;
+	if (cond)
+	{
+		if (f->del)
+			(f->del)(data);
+		return ;
+	}
 	new = fifo_cell_init(data);
 	if (!new)
 	{

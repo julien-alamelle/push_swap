@@ -27,8 +27,10 @@ typedef struct s_fifo
 }	t_fifo;
 
 t_fifo	*fifo_init(void *(*del)(void *));
+t_fifo	*fifo_copy(t_fifo *f);
 t_fifo	*fifo_del(t_fifo *f);
 void	*fifo_get(t_fifo *f);
-void	fifo_add(t_fifo *f, void *data);
+void	fifo_add(t_fifo *f, void *data, int cond);
+void	fifo_apply(t_fifo *f, void (*ft)(void *));
 
 #endif

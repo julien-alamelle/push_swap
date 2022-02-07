@@ -23,8 +23,8 @@ OBJDIR=.obj
 FILES=main\
 	pile/pile pile/pile_push pile/pile_rot pile/pile_rrot pile/pile_swap pile/pile_util pile/pile_util2\
 	quick_sort/quick_sort quick_sort/quick_sort_2\
-	pile_limit/pile_limit pile_limit/pile_limit_push pile_limit/pile_limit_rot pile_limit/pile_limit_rrot pile_limit/pile_limit_swap\
-	fifo/fifo\
+	pile_limit/pile_limit pile_limit/pile_limit_push pile_limit/pile_limit_rot pile_limit/pile_limit_rrot pile_limit/pile_limit_swap pile_limit/pile_limit_util\
+	fifo/fifo fifo/fifo_util\
 	btree/btree\
 	perfect_sort/perfect_sort
 SUBPART=pile quick_sort pile_limit fifo btree perfect_sort
@@ -35,8 +35,7 @@ INCL=$(addprefix $(INCLDIR)/,$(addsuffix .h,$(SUBPART)))
 SUBDIR=$(addprefix $(OBJDIR)/,$(SUBPART))
 
 
-all:
-	@make -C . -k $(NAME)
+all: $(NAME)
 
 clean:
 	$(RM_RF) $(OBJDIR)
@@ -44,8 +43,7 @@ clean:
 fclean: clean
 	$(RM_RF) $(NAME)
 
-re: fclean
-	@make -C .
+re: fclean all
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile $(INCL) | $(SUBDIR)
 	$(CC) $(CFLAGS) -I $(INCLDIR) -o $@ -c $<
