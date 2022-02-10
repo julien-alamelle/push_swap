@@ -12,14 +12,13 @@
 
 #include "pile_limit.h"
 
-# include <stdio.h>
 t_pile_lim	*lim_rra(t_pile_lim *p)
 {
 	t_pile_lim	*ret;
 
 	if (!p)
 		return (0);
-	if (!p->oa || (p->oa == -1 && !p->ua) || (p->last_op & 84))
+	if (!p->oa || (p->oa == -1 && p->ua < 3) || (p->last_op & 84))
 		return (0);
 	ret = pile_lim_copy(p);
 	if (!ret)
@@ -32,7 +31,6 @@ t_pile_lim	*lim_rra(t_pile_lim *p)
 		++(ret->ua);
 		--(ret->oa);
 	}
-dprintf(2,"rra ");
 	return (ret);
 }
 
@@ -42,7 +40,7 @@ t_pile_lim	*lim_rrb(t_pile_lim *p)
 
 	if (!p)
 		return (0);
-	if (!p->ob || (p->ob == -1 && !p->ub) || (p->last_op & 56))
+	if (!p->ob || (p->ob == -1 && p->ub < 3) || (p->last_op & 56))
 		return (0);
 	ret = pile_lim_copy(p);
 	if (!ret)
@@ -55,7 +53,6 @@ t_pile_lim	*lim_rrb(t_pile_lim *p)
 		++(ret->ub);
 		--(ret->ob);
 	}
-dprintf(2,"rrb ");
 	return (ret);
 }
 
@@ -65,7 +62,7 @@ t_pile_lim	*lim_rrr(t_pile_lim *p)
 
 	if (!p)
 		return (0);
-	if (!p->oa || !p->ob || (p->oa == -1 && !p->ua) || (p->ob == -1 && !p->ub)
+	if (!p->oa || !p->ob || (p->oa == -1 && p->ua < 2) || (p->ob == -1 && p->ub < 2)
 		|| (p->last_op & 124))
 		return (0);
 	ret = pile_lim_copy(p);
@@ -84,6 +81,5 @@ t_pile_lim	*lim_rrr(t_pile_lim *p)
 		++(ret->ub);
 		--(ret->ob);
 	}
-dprintf(2,"rrr ");
 	return (ret);
 }

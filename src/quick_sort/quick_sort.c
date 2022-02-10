@@ -19,7 +19,7 @@ int	quick_sort(t_pile *pile)
 	int	i;
 
 	i = pile->n;
-	if (i <= 8)
+	if (i <= CUTLIM)
 		return (perfect_sort(pile, 0, pile->n, 0));
 	cut = i / 2;
 	while (i--)
@@ -38,7 +38,7 @@ int	qs_a(t_pile *pile, int min, int max)
 	int	i;
 
 	i = max - min;
-	if (i <= 8)
+	if (i <= CUTLIM)
 		return (perfect_sort(pile, min, max, 0));
 	cut = min + i / 2;
 	while (i--)
@@ -57,7 +57,7 @@ int	qs_b(t_pile *pile, int min, int max)
 	int	i;
 
 	i = max - min;
-	if (i <= 8)
+	if (i <= CUTLIM)
 		return (perfect_sort(pile, min, max, 2));
 	cut = min + i / 2;
 	while (i--)

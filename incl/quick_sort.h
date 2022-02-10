@@ -13,6 +13,10 @@
 #ifndef QUICK_SORT_H
 # define QUICK_SORT_H
 
+# ifndef CUTLIM
+#  define CUTLIM 7
+# endif
+
 # include "pile.h"
 
 int	quick_sort(t_pile *pile);

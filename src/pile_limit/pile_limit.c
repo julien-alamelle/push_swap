@@ -48,16 +48,33 @@ t_pile_lim	*pile_lim_del(t_pile_lim *p)
 int	*lim_get_pos(t_pile_lim *p)
 {
 	int	*ret;
+	int	i;
+	int	cur;
 
 	if (!p)
 		return (0);
-	ret = get_pos(p->pile);
+	ret = malloc((p->pile->n + 3) * sizeof(int));
 	if (!ret)
-		return (ret);
-	if (!p->ua)
-		ret[p->ua] -= 1;
-	if (!p->ub)
-		ret[p->ua] -= 2;
+		return (0);
+	i = 0;
+	cur = p->pile->a;
+	ret[i++] = cur;
+	while (cur != -1 && (p->pile->u)[cur] != p->pile->a)
+	{
+		cur = (p->pile->u)[cur];
+		ret[i++] = cur;
+	}
+	if (p->pile->a != -1 && p->pile->b != -1)
+		ret[i++] = -1;
+	cur = p->pile->b;
+	ret[i++] = cur;
+	while (cur != -1 && (p->pile->u)[cur] != p->pile->b)
+	{
+		cur = (p->pile->u)[cur];
+		ret[i++] = cur;
+	}
+	ret[i++] = p->oa;
+	ret[i++] = p->ob;
 	return (ret);
 }
 
@@ -99,9 +116,9 @@ t_pile_lim	*pile_lim_init(t_pile *p, int min, int max, int info)
 	if (!ret->pile || !ret->pile)
 		return (pile_lim_del(ret));
 	pile_lim_fill(ret, min, max, info);
-	/*if (max == p->n)
+	if (max == p->n)
 		ret->oa = -1;
 	if (!min)
-		ret->ob = -1;*/
+		ret->ob = -1;
 	return (ret);
 }

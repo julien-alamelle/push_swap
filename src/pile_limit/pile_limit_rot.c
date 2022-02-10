@@ -12,7 +12,6 @@
 
 #include "pile_limit.h"
 
-# include <stdio.h>
 t_pile_lim	*lim_ra(t_pile_lim *p)
 {
 	t_pile_lim	*ret;
@@ -32,7 +31,6 @@ t_pile_lim	*lim_ra(t_pile_lim *p)
 		++(ret->oa);
 		--(ret->ua);
 	}
-dprintf(2,"ra ");
 	return (ret);
 }
 
@@ -55,7 +53,6 @@ t_pile_lim	*lim_rb(t_pile_lim *p)
 		++(ret->ob);
 		--(ret->ub);
 	}
-dprintf(2,"rb ");
 	return (ret);
 }
 
@@ -83,6 +80,5 @@ t_pile_lim	*lim_rr(t_pile_lim *p)
 		++(ret->ob);
 		--(ret->ub);
 	}
-dprintf(2,"rr ");
 	return (ret);
 }

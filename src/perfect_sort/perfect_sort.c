@@ -23,22 +23,22 @@ static t_pile_lim	*test_all_move3(t_pile_lim *cur, t_fifo *f, t_tree **t)
 	if (pile_lim_is_sort(new))
 		return (new);
 	if (new)
-		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 1));
+		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 3));
 	new = lim_rra(cur);
 	if (pile_lim_is_sort(new))
 		return (new);
 	if (new)
-		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 1));
+		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 3));
 	new = lim_rrb(cur);
 	if (pile_lim_is_sort(new))
 		return (new);
 	if (new)
-		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 1));
+		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 3));
 	new = lim_rrr(cur);
 	if (pile_lim_is_sort(new))
 		return (new);
 	if (new)
-		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 1));
+		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 3));
 	return (0);
 }
 
@@ -50,22 +50,22 @@ static t_pile_lim	*test_all_move2(t_pile_lim *cur, t_fifo *f, t_tree **t)
 	if (pile_lim_is_sort(new))
 		return (new);
 	if (new)
-		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 1));
+		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 3));
 	new = lim_pb(cur);
 	if (pile_lim_is_sort(new))
 		return (new);
 	if (new)
-		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 1));
+		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 3));
 	new = lim_ra(cur);
 	if (pile_lim_is_sort(new))
 		return (new);
 	if (new)
-		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 1));
+		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 3));
 	new = lim_rb(cur);
 	if (pile_lim_is_sort(new))
 		return (new);
 	if (new)
-		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 1));
+		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 3));
 	return (test_all_move3(cur, f, t));
 }
 
@@ -77,21 +77,20 @@ static t_pile_lim	*test_all_move(t_pile_lim *cur, t_fifo *f, t_tree **t)
 	if (pile_lim_is_sort(new))
 		return (new);
 	if (new)
-		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 1));
+		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 3));
 	new = lim_sb(cur);
 	if (pile_lim_is_sort(new))
 		return (new);
 	if (new)
-		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 1));
+		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 3));
 	new = lim_ss(cur);
 	if (pile_lim_is_sort(new))
 		return (new);
 	if (new)
-		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 1));
+		fifo_add(f, new, tree_add(t, lim_get_pos(new), new->pile->n + 3));
 	return (test_all_move2(cur, f, t));
 }
 
-# include <stdio.h>
 int	perfect_sort(t_pile *p, int min, int max, int info)
 {
 	t_fifo		*todo;
@@ -99,13 +98,8 @@ int	perfect_sort(t_pile *p, int min, int max, int info)
 	t_pile_lim	*cur;
 	t_pile_lim	*sorted;
 
-//dprintf(2, "%p %3d %3d %d\n", p, min, max, info);
-//dprintf(2, "pile_lim_init\n");
 	cur = pile_lim_init(p, min, max, info);
-//dprintf(2, "tree_init\n");
-dprintf(2, "explore %d %d %d %d\n", cur->ua, cur->oa, cur->ub, cur->ob);
 	done = tree_init(lim_get_pos(cur));
-//dprintf(2, "fifo_init\n");
 	todo = fifo_init((void *(*)(void *))pile_lim_del);
 	while (cur)
 	{

@@ -19,7 +19,7 @@ int	qs_oa(t_pile *pile, int min, int max)
 	int	i;
 
 	i = max - min;
-	if (i <= 8)
+	if (i <= CUTLIM)
 		return (perfect_sort(pile, min, max, 1));
 	cut = min + i / 2;
 	while (i--)
@@ -38,7 +38,7 @@ int	qs_ob(t_pile *pile, int min, int max)
 	int	i;
 
 	i = max - min;
-	if (i <= 8)
+	if (i <= CUTLIM)
 		return (perfect_sort(pile, min, max, 3));
 	cut = min + i / 2;
 	while (i--)
@@ -57,7 +57,7 @@ int	qs_ua(t_pile *pile, int min, int max)
 	int	i;
 
 	i = max - min;
-	if (i <= 8)
+	if (i <= CUTLIM)
 		return (perfect_sort(pile, min, max, 0));
 	cut = min + i / 2;
 	while (i--)
@@ -76,7 +76,7 @@ int	qs_ub(t_pile *pile, int min, int max)
 	int	i;
 
 	i = max - min;
-	if (i <= 8)
+	if (i <= CUTLIM)
 		return (perfect_sort(pile, min, max, 2));
 	cut = min + i / 2;
 	while (i--)
