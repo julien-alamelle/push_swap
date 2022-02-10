@@ -54,7 +54,6 @@ typedef struct s_pile_lim
 t_pile_lim	*pile_lim_init(t_pile *p, int min, int max, int info);
 t_pile_lim	*pile_lim_copy(t_pile_lim *p);
 t_pile_lim	*pile_lim_del(t_pile_lim *p);
-t_pile_lim	*pile_lim_print(t_pile_lim *p);
 t_pile_lim	*pile_lim_exec(t_pile_lim *pl, t_pile *p);
 int			*lim_get_pos(t_pile_lim *p);
 int			pile_lim_is_sort(t_pile_lim *p);

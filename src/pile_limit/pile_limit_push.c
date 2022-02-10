@@ -25,7 +25,7 @@ t_pile_lim	*lim_pa(t_pile_lim *p)
 		return (0);
 	pa(ret->pile, 0);
 	ret->last_op = 1;
-	fifo_add(ret->path, (void *) 4, 0);
+	fifo_add(ret->path, pa, 0);
 	ret->ub--;
 	ret->ua++;
 	return (ret);
@@ -44,7 +44,7 @@ t_pile_lim	*lim_pb(t_pile_lim *p)
 		return (0);
 	pb(ret->pile, 0);
 	ret->last_op = 0;
-	fifo_add(ret->path, (void *) 5, 0);
+	fifo_add(ret->path, pb, 0);
 	ret->ua--;
 	ret->ub++;
 	return (ret);

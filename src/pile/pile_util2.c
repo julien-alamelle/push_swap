@@ -45,20 +45,20 @@ static t_pile	*malloc_init(int n)
 	return (ret);
 }
 
-static void	link_start(t_pile *ret, t_pile *p, int start, int end, int info, int min)
+static void	link_edge(t_pile *ret, t_pile *p, int *lim, int min)
 {
-	if (start >= 0)
+	if (lim[0] >= 0)
 	{
-		(ret->o)[start] = end;
-		(ret->u)[end] = start;
-		if (info & 2)
-			ret->b = start;
+		(ret->o)[lim[0]] = lim[1];
+		(ret->u)[lim[1]] = lim[0];
+		if (lim[2] & 2)
+			ret->b = lim[0];
 		else
-			ret->a = start;
+			ret->a = lim[0];
 	}
 	else
 	{
-		if (info & 2)
+		if (lim[2] & 2)
 			ret->b = p->b - min;
 		else
 			ret->a = p->a - min;
@@ -68,12 +68,12 @@ static void	link_start(t_pile *ret, t_pile *p, int start, int end, int info, int
 t_pile	*pile_cut(t_pile *p, int min, int max, int info)
 {
 	t_pile	*ret;
-	int		start;
-	int		end;
+	int		lim[3];
 	int		i;
 
-	start = -1;
-	end = -1;
+	lim[0] = -1;
+	lim[1] = -1;
+	lim[2] = info;
 	ret = malloc_init(max - min);
 	if (!ret || !p)
 		return (pile_del(ret));
@@ -83,10 +83,10 @@ t_pile	*pile_cut(t_pile *p, int min, int max, int info)
 		(ret->u)[i] = (p->u)[i + min] - min;
 		(ret->o)[i] = (p->o)[i + min] - min;
 		if ((ret->o)[i] >= ret->n || (ret->o)[i] < 0)
-			start = i;
+			lim[0] = i;
 		if ((ret->u)[i] >= ret->n || (ret->u)[i] < 0)
-			end = i;
+			lim[1] = i;
 	}
-	link_start(ret, p, start, end, info, min);
+	link_edge(ret, p, lim, min);
 	return (ret);
 }

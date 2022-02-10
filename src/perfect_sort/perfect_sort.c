@@ -108,9 +108,8 @@ int	perfect_sort(t_pile *p, int min, int max, int info)
 		{
 			tree_del(done);
 			fifo_del(todo);
-			pile_lim_exec(sorted, p);
+			pile_lim_del(pile_lim_exec(sorted, p));
 			pile_lim_del(cur);
-			pile_lim_del(sorted);
 			return (1);
 		}
 		pile_lim_del(cur);

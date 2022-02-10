@@ -35,6 +35,7 @@ t_pile	*pile_copy(t_pile *p);
 t_pile	*pile_del(t_pile *p);
 t_pile	*pile_cut(t_pile *p, int min, int max, int info);
 int		pile_is_sort(t_pile *p);
+void	fill_pos(t_pile *p, int *ret);
 int		*get_pos(t_pile *p);
 t_pile	*sa(t_pile *p, char print);
 t_pile	*sb(t_pile *p, char print);

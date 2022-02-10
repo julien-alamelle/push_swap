@@ -24,7 +24,7 @@ t_pile_lim	*lim_ra(t_pile_lim *p)
 	if (!ret)
 		return (0);
 	ret->last_op = 4;
-	fifo_add(ret->path, (void *) 6, 0);
+	fifo_add(ret->path, ra, 0);
 	ra(ret->pile, 0);
 	if (ret->oa != -1)
 	{
@@ -46,7 +46,7 @@ t_pile_lim	*lim_rb(t_pile_lim *p)
 	if (!ret)
 		return (0);
 	ret->last_op = 8;
-	fifo_add(ret->path, (void *) 7, 0);
+	fifo_add(ret->path, rb, 0);
 	rb(ret->pile, 0);
 	if (ret->ob != -1)
 	{
@@ -68,7 +68,7 @@ t_pile_lim	*lim_rr(t_pile_lim *p)
 	if (!ret)
 		return (0);
 	ret->last_op = 16;
-	fifo_add(ret->path, (void *) 8, 0);
+	fifo_add(ret->path, rr, 0);
 	rr(ret->pile, 0);
 	if (ret->oa != -1)
 	{

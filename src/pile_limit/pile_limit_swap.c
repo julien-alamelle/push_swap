@@ -24,7 +24,7 @@ t_pile_lim	*lim_sa(t_pile_lim *p)
 	if (!ret)
 		return (0);
 	ret->last_op = 2;
-	fifo_add(ret->path, (void *) 1, 0);
+	fifo_add(ret->path, sa, 0);
 	sa(ret->pile, 0);
 	return (ret);
 }
@@ -41,7 +41,7 @@ t_pile_lim	*lim_sb(t_pile_lim *p)
 	if (!ret)
 		return (0);
 	ret->last_op = 2;
-	fifo_add(ret->path, (void *) 2, 0);
+	fifo_add(ret->path, sb, 0);
 	sb(ret->pile, 0);
 	return (ret);
 }
@@ -58,7 +58,7 @@ t_pile_lim	*lim_ss(t_pile_lim *p)
 	if (!ret)
 		return (0);
 	ret->last_op = 2;
-	fifo_add(ret->path, (void *) 3, 0);
+	fifo_add(ret->path, ss, 0);
 	ss(ret->pile, 0);
 	return (ret);
 }

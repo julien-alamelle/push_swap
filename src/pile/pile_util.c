@@ -60,16 +60,13 @@ t_pile	*pile_del(t_pile *p)
 	return (0);
 }
 
-int	*get_pos(t_pile *p)
+void	fill_pos(t_pile *p, int *ret)
 {
-	int	*ret;
 	int	i;
 	int	cur;
-	if (!p)
-		return (0);
-	ret = malloc((p->n + 1) * sizeof(int));
-	if (!ret)
-		return (0);
+
+	if (!p || !ret)
+		return ;
 	i = 0;
 	cur = p->a;
 	ret[i++] = cur;
@@ -87,5 +84,17 @@ int	*get_pos(t_pile *p)
 		cur = (p->u)[cur];
 		ret[i++] = cur;
 	}
+}
+
+int	*get_pos(t_pile *p)
+{
+	int	*ret;
+
+	if (!p)
+		return (0);
+	ret = malloc((p->n + 1) * sizeof(int));
+	if (!ret)
+		return (0);
+	fill_pos(p, ret);
 	return (ret);
 }
