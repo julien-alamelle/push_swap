@@ -6,7 +6,7 @@
 /*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:59:08 by jalamell          #+#    #+#             */
-/*   Updated: 2022/01/28 19:09:34 by jalamell         ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 18:53:18 by jalamell         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ static int	ft_atoi(unsigned int *ret, char *s)
 		else if (s[i] >= '0' && s[i] <= '9')
 			d = 10 * d + sign * (s[i] - '0');
 		else
-		{
-			write(2, "Error\n", 6);
 			return (1);
-		}
-		if (d < INT_MIN || d > INT_MAX)
-			write(2, "Error\n", 6);
 		if (d < INT_MIN || d > INT_MAX)
 			return (1);
 	}
+	if (i == 0 || (sign == -1 && i == 1))
+		return (1);
 	*ret = d - INT_MIN;
 	return (0);
 }
@@ -83,6 +80,7 @@ static unsigned int	*get_arg(int n, char **av)
 		++i;
 	if (i < n)
 	{
+		write(2, "Error\n", 6);
 		free(ret);
 		ret = 0;
 	}
