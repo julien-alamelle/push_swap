@@ -51,12 +51,14 @@ int	*lim_get_pos(t_pile_lim *p)
 
 	if (!p)
 		return (0);
+	if (!(p->pile))
+		return (0);
 	ret = malloc((p->pile->n + 3) * sizeof(int));
 	if (!ret)
 		return (0);
 	fill_pos(p->pile, ret);
 	ret[p->pile->n + 1] = p->oa;
-	ret[p->pile->n * 2] = p->ob;
+	ret[p->pile->n + 2] = p->ob;
 	return (ret);
 }
 

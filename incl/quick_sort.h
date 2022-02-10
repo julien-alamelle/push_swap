@@ -14,7 +14,7 @@
 # define QUICK_SORT_H
 
 # ifndef CUTLIM
-#  define CUTLIM 7
+#  define CUTLIM 6
 # endif
 
 # include "pile.h"
